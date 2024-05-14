@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOP JS Validation API Mini Project</title>
+  <link rel="stylesheet" href="jsValidationAPI.css">
+</head>
+<body>
+  <form novalidate>
+
+    <label for="email">
+      <span>Email: </span>
+      <input type="email" id="email" required minlength="8">
+      <span class="error"></span>
+    </label>
+    <label for="country">
+      <span>Country: </span>
+      <input type="text" id="country" maxlength="20">
+      <span class="error"></span>
+    </label>
+    <label for="zip">
+      <span>Zip Code: </span>
+      <input type="text" id="zip" pattern="[0-9]{5}">
+      <span class="error"></span>
+    </label>
+    <label for="password">
+      <span>Password: </span>
+      <input type="password" id="password" required minlength="8">
+      <span class="error"></span>
+    </label>
+    <label for="password2">
+      <span>Confirm Password: </span>
+      <input type="password" id="password2" required minlength="8">
+      <span class="error"></span>
+    </label>
+
+    <button type="submit">Submit</button>
+
+  </form>
+  <script src="jsValidationAPI.js"></script>
+</body>
+</html>
