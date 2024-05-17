@@ -6,18 +6,51 @@
 </head>
 <body>
   <img src="#">
+  <br>
+  <button id="getNewBtn">Get New</button>
+  <br>
+  <label for="searchInput"></label>
+  <input id="searchInput" type="text">
+  <button id="searchBtn">Search</button>
   <script>
     const img = document.querySelector('img');
-    fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=cats', {mode: 'cors'})
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(response) {
-        img.src = response.data.images.original.url;
-      })
-      .catch(e => {
-      console.log(e)
-      });
+    const getNewBtn = document.getElementById('getNewBtn');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    
+    function fetchGiphyImg () {
+      fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=cats', {mode: 'cors'})
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          img.src = response.data.images.original.url;
+        })
+        .catch(e => {
+        console.log("Error: ", e);
+        });
+      console.log("Fetching a GIPHY image of cat");
+    }
+
+    function fetchGiphyImgWith (keyword) {
+      if (keyword === "") keyword = "random";
+      fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=' + keyword, {mode: 'cors'})
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          img.src = response.data.images.original.url;
+        })
+        .catch(e => {
+        console.log("Error: ", e);
+        });
+      console.log("Fetching a GIPHY image of " + keyword);
+    }
+    
+    getNewBtn.addEventListener('click', () => fetchGiphyImg());
+    searchBtn.addEventListener('click', () => fetchGiphyImgWith(searchInput.value));
+
+    window.onload = fetchGiphyImg();
   </script>
 </body>
 </html>
