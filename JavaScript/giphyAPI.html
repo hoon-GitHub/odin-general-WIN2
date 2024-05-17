@@ -18,33 +18,27 @@
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
     
-    function fetchGiphyImg () {
-      fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=cats', {mode: 'cors'})
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(response) {
-          img.src = response.data.images.original.url;
-        })
-        .catch(e => {
-        console.log("Error: ", e);
-        });
+    async function fetchGiphyImg () {
       console.log("Fetching a GIPHY image of cat");
+      try {
+        const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=cats', {mode: 'cors'})
+        const catData = await response.json();
+        img.src = catData.data.images.original.url;
+      } catch (err) {
+        console.log("Error: ", err);
+      }
     }
 
-    function fetchGiphyImgWith (keyword) {
+    async function fetchGiphyImgWith (keyword) {
       if (keyword === "") keyword = "random";
-      fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=' + keyword, {mode: 'cors'})
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(response) {
-          img.src = response.data.images.original.url;
-        })
-        .catch(e => {
-        console.log("Error: ", e);
-        });
       console.log("Fetching a GIPHY image of " + keyword);
+      try {
+        const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=hRRXKgk9617SFMBNZqnqiVWQ7xe2DSmA&s=' + keyword, {mode: 'cors'})
+        const catData = await response.json();
+        img.src = catData.data.images.original.url;
+      } catch (err) {
+        console.log("Error: ", err);
+      }
     }
     
     getNewBtn.addEventListener('click', () => fetchGiphyImg());
